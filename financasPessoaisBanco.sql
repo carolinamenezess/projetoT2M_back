@@ -1,0 +1,37 @@
+CREATE TABLE usuarios (
+    usuario_id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+	senha VARCHAR (100) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE despesas (
+ despesa_id SERIAL PRIMARY KEY,
+ categoria VARCHAR(70),
+ valor FLOAT,
+ nome VARCHAR(70),
+ data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ user_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES usuarios(usuario_id) ON DELETE CASCADE
+);
+
+CREATE TABLE receitas (
+ receita_id SERIAL PRIMARY KEY,
+ categoria VARCHAR(70),
+ nome VARCHAR(70),
+ valor FLOAT,
+ data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  user_id INTEGER NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES usuarios(usuario_id) ON DELETE CASCADE
+);
+
+CREATE TABLE categorias (
+ categoria_id SERIAL PRIMARY KEY,
+ nome VARCHAR(50) NOT NULL,
+  tipo VARCHAR(50) NOT NULL,
+ data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ 
+  user_id INTEGER NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES usuarios(usuario_id) ON DELETE CASCADE
+);
